@@ -8,22 +8,29 @@ Rules:
 - There is a linked project under the project tabs that is to be used to document tasks. Please mark tasks accuractely based on their actual status to avoid confusion and allow for effecient asynchronous work. Thank you
 - Meet the Prerequisites before beggining work on the project
 
+# **ATTENTION Jetpack 6.0 only works with OpenCV 4.8.0**
 
 # Places to Start
 1. Classical CV Lane Line detection techniques
    <ol type="a">
-     <li>Chnage augmentation techniques in Roboflow or perform custom augmentation</li>
-     <li>Adjust training parameters</li>
+     <li>HSV filtering is something we should investigate extensively this year. Can be done with OpenCV or you can look at ways to do it using the nvidia VPI</li>
+     <li>Sobel filtering to identify lane lines [link](https://github.com/kemfic/Curved-Lane-Lines?tab=readme-ov-file)</li>
    </ol>
-2. Investigate YOLOv9 and YOLOv10
+2. Pre and post processing for better output
    <ol type="a">
-     <li>Train YOLOv9 and YOLOv10 models and compare their performance against our existing models</li>
+     <li>DBSCAN for getting rid of noise in the output</li>
+     <li>Filters to reduce noise in the input image (gaussian, sobel, etc.)</li>
+     <li>[Kalman filters](https://en.wikipedia.org/wiki/Kalman_filter) to help with consistent output of lane lines</li>
    </ol>
-3. Try new architectures
+3. Creating a hybrid system
    <ol type="a">
-     <li>RoboFlow supports many other architectures that you can train using the same dataset.</li>
-      <li>SAM 2 is another model that is gaining popularity and is an option for exploration</li>
+     <li>Apply weighting to our machine learning output based on confidences and suppliment bad confidence or buffers with classical output</li>
+     <li>Detecting lane lines and blocking out/cropping the frame to only the important parts for better machine learning inference </li>
    </ol>
+4. Adding cameras to the system
+   <ol type="a">
+      <li>Investigate weather to create a full panoramic view (feature detection to create homography), or to use the cameras seperately</li>
+      <li>Calobrate 2 or more cameras for stereo vision so that you can output pointcloud data</li>
 
 # This team is also in charge of:
 - Keeping the dataset clean and up to date
